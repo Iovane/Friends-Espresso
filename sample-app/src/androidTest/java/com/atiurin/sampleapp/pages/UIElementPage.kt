@@ -1,15 +1,15 @@
 package com.atiurin.sampleapp.pages
 
 import android.view.View
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.withClassName
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.atiurin.sampleapp.R
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers
-import org.hamcrest.Matchers.containsString
-import org.hamcrest.Matchers.instanceOf
 
-object UIElementPage {
+object UIElementPage{
 
     val radioBtnInvisible: Matcher<View> by lazy { withId(R.id.invisible) }
     val radioBtnVisible: Matcher<View> by lazy { withText("VISIBLE") }

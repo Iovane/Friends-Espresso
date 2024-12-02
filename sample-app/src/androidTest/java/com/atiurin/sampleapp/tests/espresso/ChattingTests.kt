@@ -7,7 +7,11 @@ import com.atiurin.sampleapp.activity.MainActivity
 import com.atiurin.sampleapp.helper.isTextOnScreen
 import com.atiurin.sampleapp.helper.isViewDisplayed
 import com.atiurin.sampleapp.helper.typeText
+import com.atiurin.sampleapp.pages.DashboardPage
 import com.atiurin.sampleapp.pages.UIElementPage
+import com.atiurin.sampleapp.steps.ChatSteps
+import com.atiurin.sampleapp.steps.DashboardSteps
+import com.atiurin.sampleapp.steps.MenuSteps
 import com.atiurin.sampleapp.tests.BaseTest
 import com.atiurin.ultron.extensions.tap
 import org.junit.Rule
@@ -22,15 +26,21 @@ class ChattingTests: BaseTest() {
     val activityTestRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun textWithMyFriend() {
-        with(UIElementPage) {
-            isTextOnScreen("Friends")
-            nameChandler.isViewDisplayed()
-            nameChandler.tap()
-            textInput.typeText("Hello Rachel")
+    fun chatWithRachel() {
+        DashboardSteps.dashboardDisplayed()
+        DashboardSteps.openChat()
 
-            messageInputText.isViewDisplayed()
+        val textToSend = "Hi Rachel hows your cat doing?"
+        ChatSteps.sendText(textToSend)
+        ChatSteps.checkSentText(textToSend)
+    }
 
-        }
+    @Test
+    fun customClicksTest() {
+        DashboardSteps.dashboardDisplayed()
+        MenuSteps.openMenu()
+        MenuSteps.openCustomClicks()
+        MenuSteps.clickRadioBtns()
+        MenuSteps.validateAllRadiosMarked()
     }
 }
